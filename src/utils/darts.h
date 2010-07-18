@@ -157,7 +157,7 @@ namespace Darts {
 			size_t new_size =  static_cast<size_t>(alloc_size_ *
 				_max(1.05, 1.0 * key_size_ / progress_));
 			if(!new_size)
-				new_size = alloc_size_ * 1.0 * key_size_; //????
+				new_size = alloc_size_ * key_size_;
 			resize(new_size);
 		}
 

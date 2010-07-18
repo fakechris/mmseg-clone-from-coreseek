@@ -101,9 +101,9 @@ int UnigramDict::exactMatch(const char* key, int *id)
 	int len = strlen(key);
 	if(len<4){
 		const char* tm_pCur = key;
-		char v = key[0];
+		unsigned char v = key[0];
 		//might be single cjk char.
-		if ( v<128 && len == 1 && id)
+		if ( v<128 && (len == 1) && id)
 			*id =  -1*(int)v;
 		// get number of bytes
 		int iBytes = 0, iBytesLength = 0;
