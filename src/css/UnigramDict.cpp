@@ -34,7 +34,7 @@ int UnigramDict::load(const char* filename)
 	return m_da.open(filename);
 }
 
-/** 
+/**
      *  This function should be used only, in Debug mode.
      */
 std::string UnigramDict::getString(int id)
@@ -43,7 +43,7 @@ std::string UnigramDict::getString(int id)
 }
 
 
-/** 
+/**
      *  Find all word item in UnigramDict, which buf as a prefix
      *  @return total items found
      */
@@ -68,7 +68,7 @@ int UnigramDict::import(UnigramCorpusReader &ur)
 			key.push_back(ptr);
 			value.push_back(rec->count);
 		}
-	}//end for	
+	}//end for
 	//build da
 	m_da.clear();
 	//1st 0 is the length array.

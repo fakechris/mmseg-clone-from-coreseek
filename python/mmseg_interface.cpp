@@ -66,7 +66,7 @@ extern "C" {
 }
 
  PyObject *segment(PyObject *self, PyObject *args) {
-	
+
 	PyObject *module = PyImport_ImportModule("cmmseg");
 	 SegmenterManager* mgr =  NULL;
 	{
@@ -76,16 +76,16 @@ extern "C" {
 			return NULL;
 		}
 		PyObject *c_api_object = PyDict_GetItemString(module_dict, "__segmgr");
-		
+
 		if (!c_api_object || !PyCObject_Check(c_api_object)) {
 			PyErr_SetString(PyExc_ValueError, "Needs load segment dictionary library frist!");
 			return NULL;
 		}
-		mgr = (SegmenterManager*)PyCObject_AsVoidPtr(c_api_object); 
-	}	
+		mgr = (SegmenterManager*)PyCObject_AsVoidPtr(c_api_object);
+	}
 
-	Segmenter* seg = mgr->getSegmenter(); 
-	char *fromPython; 
+	Segmenter* seg = mgr->getSegmenter();
+	char *fromPython;
 
 	if (!PyArg_Parse(args, "(s)", &fromPython))
         return NULL;

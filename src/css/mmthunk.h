@@ -32,7 +32,7 @@
 #define CHUNK_DEBUG		0
 
 namespace css {
-	
+
   class Chunk{
 	public:
 		Chunk():m_free_score(0.0),total_length(0){}
@@ -109,13 +109,13 @@ namespace css {
 			if(num_chunk == 1)
 				return m_chunks[0].tokens[0];
 			//debug use->dump chunk
-#if CHUNK_DEBUG			
+#if CHUNK_DEBUG
 			for(size_t i = 0; i<num_chunk; i++){
 				for(size_t j = 0; j< m_chunks[i].tokens.size();j++)
 					printf("%d,",m_chunks[i].tokens[j]);
 				printf("\n");
 			}
-#endif			
+#endif
 			//do filter
 			//apply rule 2
 			float avg_length = 0;
@@ -139,8 +139,8 @@ namespace css {
 			//apply rule 3
 			u4 remains_r3[256];
 			u4* k_ptr_r3 = remains_r3;
-			avg_length = 1024*64; //an unreachable avg 
-			for(size_t i = 0; i<k_ptr-remains; i++){
+			avg_length = 1024*64; //an unreachable avg
+			for(size_t i = 0; i<(size_t)(k_ptr-remains); i++){
 				float avg = m_chunks[remains[i]].get_avg();
 				if(avg < avg_length) {
 					avg_length = avg;
@@ -158,7 +158,7 @@ namespace css {
 			//apply r4 max freedom
 			float max_score = 0.0;
 			size_t idx = -1;
-			for(size_t i = 0; i<k_ptr_r3-remains_r3; i++){
+			for(size_t i = 0; i<(size_t)(k_ptr_r3-remains_r3); i++){
 				float score = m_chunks[remains_r3[i]].get_free();
 				if(score>max_score){
 					max_score = score;
@@ -184,7 +184,7 @@ namespace css {
 		  //length(0),
 		  freq(0){
 		};
-		
+
 	public:
 		//u4 length;
 		u4 freq;
@@ -201,7 +201,7 @@ namespace css {
 			item_list.set_size(CHUNK_BUFFER_SIZE*2);
 		};
 		~MMThunk() {};
-		
+
 		void setItems(i4 idx, u2 rs_count, UnigramDict::result_pair_type* results);
 		void setKwItems(i4 idx, u2 rs_count, UnigramDict::result_pair_type* results);
 		void advance(u2 step) { base_offset += step; };

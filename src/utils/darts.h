@@ -437,7 +437,7 @@ namespace Darts {
 	    set_result(result, -n-1, len, -1*p);
       return result;
     }
-	
+
 	template <class T>
     size_t commonPrefixSearch(const key_type *key,
                               T* result,
@@ -502,7 +502,7 @@ namespace Darts {
                               size_t result_len,
                               size_t len = 0,
                               size_t node_pos = 0) {
-      if (!len) 
+      if (!len)
 		  return 0;
 
       register array_type_  b   = array_[node_pos].base;

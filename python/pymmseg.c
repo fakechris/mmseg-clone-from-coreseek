@@ -16,7 +16,7 @@ static struct PyMethodDef mmseg_methods[] = {
 };
 
 PyMODINIT_FUNC
-initcmmseg() {
+initcmmseg(void) {
     PyObject *m;
 	//PyObject *c_api_object;
 
