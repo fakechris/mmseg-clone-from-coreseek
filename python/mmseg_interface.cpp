@@ -84,12 +84,14 @@ extern "C" {
 		mgr = (SegmenterManager*)PyCObject_AsVoidPtr(c_api_object);
 	}
 
-	Segmenter* seg = mgr->getSegmenter();
+    // Chris: not get from pool and delete later, or get from pool and clear
+	Segmenter* seg = mgr->getSegmenter(false);
 	char *fromPython;
 
-	if (!PyArg_Parse(args, "(s)", &fromPython))
+	if (!PyArg_Parse(args, "(s)", &fromPython)) {
+        delete seg;
         return NULL;
-    else {
+    } else {
         seg->setBuffer((u1*)fromPython, (u4)strlen(fromPython));
 
 		PyObject* seg_result = PyList_New(0);
@@ -101,9 +103,12 @@ extern "C" {
 				break;
 			}
 			//append new item
-			PyList_Append(seg_result, PyString_FromStringAndSize(tok,len));
+			PyObject *res = PyString_FromStringAndSize(tok,len);
+			PyList_Append(seg_result, res);
+            Py_DECREF(res);
 			seg->popToken(len);
 		}
+        delete seg;
         return seg_result;
     }
 }
@@ -111,4 +116,3 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-
